@@ -7,6 +7,9 @@ describe("Donator", function () {
     const donate = await Donator.deploy();
     await donate.deployed();
 
+    expect(await donate.getCountDonations()).to.equal(0);
+    expect(await donate.getTotalDonations()).to.equal(ethers.utils.parseEther("0"));
+
     const makeDonation = await donate.donate({ value: ethers.utils.parseEther("5") });
 
     // wait until the transaction is mined
