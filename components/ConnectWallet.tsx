@@ -4,8 +4,7 @@ import { injected } from "../utils/smartContracts";
 import { useRouter } from "next/router";
 
 export default function ConnectWallet() {
-  const { active, account, library, connector, activate, deactivate } =
-    useWeb3React();
+  const { active, account, activate, deactivate } = useWeb3React();
   const router = useRouter();
 
   useEffect(() => {});
