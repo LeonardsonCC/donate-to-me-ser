@@ -55,7 +55,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="w-scree h-screen flex flex-col items-center justify-center">
+    <div className="w-scree h-screen flex flex-col items-center justify-center px-5">
       <h1 className="text-2xl mb-5">
         Hello my friend, do you want to buy me some coffee?
       </h1>
