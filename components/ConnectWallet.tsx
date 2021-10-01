@@ -3,7 +3,11 @@ import { useEffect } from "react";
 import { injected } from "../utils/smartContracts";
 import { useRouter } from "next/router";
 
-export default function ConnectWallet() {
+export default function ConnectWallet({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const { active, account, activate, deactivate } = useWeb3React();
   const router = useRouter();
 
@@ -47,11 +51,13 @@ export default function ConnectWallet() {
           <p>Your wallet: {account}</p>
 
           <button
-            className="px-5 py-2 bg-blue-500 rounded-lg text-white w-full"
+            className="px-5 py-2 mt-3 bg-blue-500 rounded-lg text-white w-full"
             onClick={disconnect}
           >
             Disconnect
           </button>
+
+          {children}
         </>
       )}
     </div>
