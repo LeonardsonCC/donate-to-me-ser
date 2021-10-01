@@ -20,7 +20,6 @@ const Home: NextPage = () => {
   const [countDonations, setCountDonations] = useState<number | null>(null);
 
   useEffect(() => {
-    setIsDonateSuccess(true);
     if (account) {
       web3.eth.getBalance(account).then((newBalance) => {
         setBalance(web3.utils.fromWei(newBalance, "ether"));
