@@ -14,6 +14,7 @@ const Home: NextPage = () => {
   const [error, setError] = useState("");
   const [balance, setBalance] = useState("");
   const [donateAmount, setDonateAmount] = useState("0");
+  const [isDonateSuccess, setIsDonateSuccess] = useState(false);
 
   useEffect(() => {
     if (account) {
@@ -28,6 +29,7 @@ const Home: NextPage = () => {
   const donate = async () => {
     // @ts-ignore
     const DonatorContract = new web3.eth.Contract(donatorAbi, contractAddress);
+    setIsDonateSuccess(false);
 
     if (account) {
       if (Number(donateAmount) < 0) {
@@ -43,6 +45,7 @@ const Home: NextPage = () => {
           gas,
         });
         setError("");
+        setIsDonateSuccess(true);
       } catch (err) {
         setError(
           "Something wrong occurred during transaction... Please try again!"
@@ -91,6 +94,11 @@ const Home: NextPage = () => {
       {error ? (
         <div className="bg-red-500 rounded-lg p-5 mt-5">
           <p className="text-white">{error}</p>
+        </div>
+      ) : null}
+      {isDonateSuccess ? (
+        <div>
+          <p>Thank you so much for the donation!!</p>
         </div>
       ) : null}
     </div>
