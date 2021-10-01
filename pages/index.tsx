@@ -66,6 +66,7 @@ const Home: NextPage = () => {
               className="mb-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="number"
               step="0.5"
+              min="0"
               onChange={changeDonateAmountHandler}
               placeholder="How much do you want to give me? <3"
             />
