@@ -8,15 +8,19 @@ import useWeb3 from "../hooks/useWeb3";
 const contractAddress = "0xE6ab19513E0b6242526A0cCF05D027B3940B3C52";
 
 const Home: NextPage = () => {
-  const { active, account } = useWeb3React();
+  const { account } = useWeb3React();
   const web3 = useWeb3();
+  // @ts-ignore
+  const DonatorContract = new web3.eth.Contract(donatorAbi, contractAddress);
 
   const [error, setError] = useState("");
   const [balance, setBalance] = useState("");
   const [donateAmount, setDonateAmount] = useState("0");
   const [isDonateSuccess, setIsDonateSuccess] = useState(false);
+  const [countDonations, setCountDonations] = useState<number | null>(null);
 
   useEffect(() => {
+    setIsDonateSuccess(true);
     if (account) {
       web3.eth.getBalance(account).then((newBalance) => {
         setBalance(web3.utils.fromWei(newBalance, "ether"));
@@ -27,8 +31,6 @@ const Home: NextPage = () => {
   }, [web3, account]);
 
   const donate = async () => {
-    // @ts-ignore
-    const DonatorContract = new web3.eth.Contract(donatorAbi, contractAddress);
     setIsDonateSuccess(false);
 
     if (account) {
@@ -43,6 +45,7 @@ const Home: NextPage = () => {
           from: account,
         });
         setError("");
+        await getDonationsCount();
         setIsDonateSuccess(true);
       } catch (err) {
         setError(
@@ -52,6 +55,11 @@ const Home: NextPage = () => {
       const newBalance = await web3.eth.getBalance(account);
       setBalance(web3.utils.fromWei(newBalance, "ether"));
     }
+  };
+
+  const getDonationsCount = async () => {
+    const result = await DonatorContract.methods.getCountDonations().call();
+    setCountDonations(result);
   };
 
   const changeDonateAmountHandler = (
@@ -97,6 +105,13 @@ const Home: NextPage = () => {
       {isDonateSuccess ? (
         <div className="bg-green-500 rounded-lg p-5 mt-5">
           <p className="text-white">Thank you so much for the donation!!</p>
+          {countDonations !== null ? (
+            <p className="text-white">
+              With this one, I received {countDonations} donations
+            </p>
+          ) : (
+            <p className="text-white">Loading donations count...</p>
+          )}
         </div>
       ) : null}
     </div>
