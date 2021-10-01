@@ -95,8 +95,8 @@ const Home: NextPage = () => {
         </div>
       ) : null}
       {isDonateSuccess ? (
-        <div>
-          <p>Thank you so much for the donation!!</p>
+        <div className="bg-green-500 rounded-lg p-5 mt-5">
+          <p className="text-white">Thank you so much for the donation!!</p>
         </div>
       ) : null}
     </div>
