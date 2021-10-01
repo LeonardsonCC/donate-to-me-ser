@@ -16,11 +16,12 @@ const Home: NextPage = () => {
   const [donateAmount, setDonateAmount] = useState("0");
 
   useEffect(() => {
-    setError("");
     if (account) {
       web3.eth.getBalance(account).then((newBalance) => {
         setBalance(web3.utils.fromWei(newBalance, "ether"));
       });
+    } else {
+      setError("");
     }
   }, [web3, account]);
 
@@ -29,6 +30,11 @@ const Home: NextPage = () => {
     const DonatorContract = new web3.eth.Contract(donatorAbi, contractAddress);
 
     if (account) {
+      if (Number(donateAmount) < 0) {
+        setError("The donation amount needs to be greater than 0");
+        return;
+      }
+
       const gas = await DonatorContract.methods.donate().estimateGas();
       try {
         await DonatorContract.methods.donate().send({
