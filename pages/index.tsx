@@ -64,7 +64,8 @@ const Home: NextPage = () => {
           <div className="py-4">
             <input
               className="mb-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
+              type="number"
+              step="0.5"
               onChange={changeDonateAmountHandler}
               placeholder="How much do you want to give me? <3"
             />
