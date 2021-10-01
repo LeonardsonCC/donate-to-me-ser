@@ -51,7 +51,7 @@ export default function ConnectWallet({
           <p>Your wallet: {account}</p>
 
           <button
-            className="px-5 py-2 mt-3 bg-blue-500 rounded-lg text-white w-full"
+            className="px-5 py-2 mt-3 bg-red-500 rounded-lg text-white w-full"
             onClick={disconnect}
           >
             Disconnect
