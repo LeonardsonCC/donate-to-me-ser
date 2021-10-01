@@ -36,7 +36,7 @@ const Home: NextPage = () => {
         });
       } catch (err) {
         setError(
-          "Something wrong ocurred during transaction... Please try again!"
+          "Something wrong occurred during transaction... Please try again!"
         );
       }
       const newBalance = await web3.eth.getBalance(account);
