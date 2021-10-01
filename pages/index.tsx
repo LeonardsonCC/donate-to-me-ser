@@ -37,12 +37,10 @@ const Home: NextPage = () => {
         return;
       }
 
-      const gas = await DonatorContract.methods.donate().estimateGas();
       try {
         await DonatorContract.methods.donate().send({
           value: web3.utils.toWei(donateAmount.replace(",", "."), "ether"),
           from: account,
-          gas,
         });
         setError("");
         setIsDonateSuccess(true);
