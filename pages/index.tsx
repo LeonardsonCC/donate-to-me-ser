@@ -5,7 +5,7 @@ import { useWeb3React } from "@web3-react/core";
 import { useEffect, useState } from "react";
 import useWeb3 from "../hooks/useWeb3";
 
-const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+const contractAddress = "0xE6ab19513E0b6242526A0cCF05D027B3940B3C52";
 
 const Home: NextPage = () => {
   const { active, account } = useWeb3React();
