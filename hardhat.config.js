@@ -13,4 +13,10 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  */
 module.exports = {
   solidity: "0.8.4",
+  networks: {
+    fantomMainnet: {
+      url: "https://rpcapi.fantom.network",
+      accounts: [process.env.FANTOM_PRIVATE_KEY]
+    }
+  }
 };
